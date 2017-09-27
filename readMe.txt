@@ -53,5 +53,5 @@
 	MotionSimulatorBase:
 		array.txt dir (line 55)
 
-Open SD.pro to setup Qt project
-	
+*Open SD.pro to setup Qt project
+*Note: remember to use '\\' = '\' in directories in c++
