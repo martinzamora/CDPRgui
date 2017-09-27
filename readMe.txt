@@ -1,5 +1,6 @@
 *MATLAB required
 *CASPR required
+*Qt IDE for development
 
 *Setup files from github:
     PoCaBot_spatial_bodies.xml	
@@ -52,5 +53,5 @@
 	MotionSimulatorBase:
 		array.txt dir (line 55)
 
-
+Open SD.pro to setup Qt project
 	
