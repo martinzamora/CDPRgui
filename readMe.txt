@@ -49,8 +49,8 @@
 		on_confirmbutton_5_clicked():
 			array.txt dir
 
-		MotionSimulatorBase:
-			array.txt dir (line 55)
+	MotionSimulatorBase:
+		array.txt dir (line 55)
 
 
 	
