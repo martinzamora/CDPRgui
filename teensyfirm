@@ -1,11 +1,14 @@
-                      /***********************************************************************************************************************
- * @FILE serial_accelstepper_control.ino
- * @BRIEF An example Arduino sketch showing USB-serial communications with the Teensy microcontroller for stepper control
- * using the AccelStepper library
- *
- * This program provides an example of USB-serial communications with the Teensy 3.1 microcontroller. The communication 
- * is based on variable width byte packets containing an error checksum. The packet structure is defined as follows:
- *
+/***********************************************************************************************************************
+ * @FILE CableRobotControl.ino
+ * @BRIEF Coordinated control for 8 stpper motors in a Cable Robot over serial communication
+ * 
+ * @NOTE: This is a modified file. It uses serial_accelstepper_control.ino as the base. 
+ *        It had been modified to control 8 motors, up from 6. This file also uses MultiStepper.h instead of AccelStepper.h
+ *        The packet system is re-used but some variables are unused (acceleration)
+ *        
+ *        
+ * The communication is based on variable width byte packets containing an error checksum. The packet structure is defined 
+ * as follows:
  * packet[0] = PACKET_START_BYTE (0xAA)
  * packet[1] = PACKET_SIZE (total number of bytes including overhead and payload)
  * packet[n+2] = payload byte n -> [0, PAYLOAD_SIZE - 1]
@@ -22,7 +25,11 @@
  * 3. Execute deferred commands [0xAA][4][0x0C][checksum]
  *    Executes all deferred commands simultaneously
  *
- * @AUTHOR Christopher D. McMurrough
+ * @ORIGINAL AUTHOR Christopher D. McMurrough
+ * @MODIFIED AUTHORS Martin Zamora Martine
+ *                   Taylor
+ *                   Robert
+ *                   Patrick
  **********************************************************************************************************************/
 
 // inlcude necessary header files
@@ -260,8 +267,8 @@ void loop()
   int packetCount=0;
   int packetSize = PACKET_MIN_BYTES;
 
-  long positions[10][8];
-  long velos[10][8];
+  long positions[MAX_BUF][8];
+  long velos[MAX_BUF][8];
   // continuously check for received packets
   while(isRunning)
   {
